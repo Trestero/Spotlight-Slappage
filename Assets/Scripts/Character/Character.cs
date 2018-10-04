@@ -36,12 +36,6 @@ public class Character : MonoBehaviour
         // grab component references
         rb = GetComponent<Rigidbody2D>();
 	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-
-	}
 
     public void Move(float dir) // takes in a float from -1 to 1 and applies walk speed, then turns that into horizontal velocity on the rigidbody
     {
@@ -63,12 +57,12 @@ public class Character : MonoBehaviour
         }
 
         // get required initial velocity to jump to a given height
-        // V^2 = Vo^2 + ad   |    0 = Vo^2 + ad    |    Vo^2 = -ad
+        // V^2 = Vo^2 + 2ad   |    0 = Vo^2 + 2ad    |    Vo^2 = -2ad
         // where d = jumpHeight and a is the magnitude of gravity
         /// to make the jump height look natural, we can use this to solve for the necessary initial velocity
         /// This is computationally pretty inefficient, so once we have a solid jump height nailed down for characters we should do this in Start()
         /// For now this allows quick iteration and changing jumpHeight during editor playmode
-        jumpVelocity = Mathf.Sqrt(-Physics.gravity.y * jumpHeight);
+        jumpVelocity = Mathf.Sqrt(-Physics.gravity.y * jumpHeight * 2);
 
 
         // jump to a given height in the direction opposite gravity

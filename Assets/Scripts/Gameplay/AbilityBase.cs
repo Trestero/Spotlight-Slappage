@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityBase : MonoBehaviour {
+public abstract class AbilityBase : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
