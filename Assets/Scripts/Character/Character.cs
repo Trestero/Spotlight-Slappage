@@ -28,7 +28,7 @@ public class Character : MonoBehaviour
     [SerializeField]
     private float jumpHeight = 3f;
 
-    public float jumpVelocity;
+    private float jumpVelocity;
 
     // Use this for initialization
     void Start ()
@@ -40,10 +40,7 @@ public class Character : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		if (!grounded && rb.velocity.magnitude == 0f)
-        {
-            Debug.Log(transform.position.y);
-        }
+
 	}
 
     public void Move(float dir) // takes in a float from -1 to 1 and applies walk speed, then turns that into horizontal velocity on the rigidbody
