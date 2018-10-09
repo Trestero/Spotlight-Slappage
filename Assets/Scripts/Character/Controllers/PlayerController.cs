@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump" + owner.GetJoystick()))
             {
+                Debug.Log(Input.GetJoystickNames()[0]);
                 pawn.Jump();
             }
         }
@@ -52,6 +53,8 @@ public class PlayerController : MonoBehaviour
         {
             pawn.Jump();
         }
+
+        
     }
 
 }
