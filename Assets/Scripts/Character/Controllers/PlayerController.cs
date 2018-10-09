@@ -52,6 +52,10 @@ public class PlayerController : MonoBehaviour
         {
             pawn.Jump();
         }
+        if(Input.GetKey(KeyCode.RightShift))
+            {
+            pawn.Attack();
+        }
     }
 
 }

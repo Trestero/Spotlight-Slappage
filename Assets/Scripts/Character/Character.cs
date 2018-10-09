@@ -32,6 +32,10 @@ public class Character : MonoBehaviour
 
     private float jumpVelocity;
 
+    // slapper objs
+    public GameObject slapperLeft;
+    public GameObject slapperRight;
+
     // Use this for initialization
     void Start ()
     {
@@ -75,7 +79,14 @@ public class Character : MonoBehaviour
     // do attacky things
     public void Attack()
     {
-
+        if(rb.velocity.x > 0 && slapperRight.activeSelf==false)
+        {
+            slapperRight.SetActive(true);
+        }
+        if (rb.velocity.x < 0 && slapperLeft.activeSelf == false)
+        {
+            slapperLeft.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
