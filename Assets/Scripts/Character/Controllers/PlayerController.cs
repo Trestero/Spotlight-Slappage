@@ -29,18 +29,29 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        ReadInput();
+	}
+
+
+    void ReadInput()
+    {
         // grab horizontal input and plug it into the pawn
         pawn.Move(Input.GetAxis("Horizontal" + owner.GetJoystick()));
 
-        if(owner.GetJoystick() != 0 && Input.GetButtonDown("joystick " + owner.GetJoystick() + " button 0"))
+        // controller jump
+        if (owner.GetJoystick() != 0)
         {
-            pawn.Jump();
+            if (Input.GetButtonDown("Jump" + owner.GetJoystick()))
+            {
+                pawn.Jump();
+            }
         }
-        else if(Input.GetAxis("Vertical" + owner.GetJoystick()) > 0)
-        {
-            pawn.Jump();
-        }
-	}
 
+        // keyboard
+        else if (Input.GetAxis("Vertical" + owner.GetJoystick()) > 0)
+        {
+            pawn.Jump();
+        }
+    }
 
 }

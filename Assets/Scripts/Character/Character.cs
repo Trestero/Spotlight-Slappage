@@ -19,6 +19,8 @@ public class Character : MonoBehaviour
 {
     // Unserialized fields don't appear in the inspector
     private Rigidbody2D rb;
+
+    [SerializeField]
     private bool grounded; // whether the character is on the ground
 
 
@@ -70,7 +72,13 @@ public class Character : MonoBehaviour
         grounded = false;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    // do attacky things
+    public void Attack()
+    {
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!grounded && collision.gameObject.CompareTag("LevelBlock"))
         {
