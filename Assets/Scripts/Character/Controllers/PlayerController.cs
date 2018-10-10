@@ -48,9 +48,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (owner.ControllerNum != 0)
+        if (owner.ControllerNum > 0)
         {
-            if (Input.GetJoystickNames().Length < owner.Index || Input.GetJoystickNames()[owner.Index] == "")
+            if (Input.GetJoystickNames().Length < owner.Index || Input.GetJoystickNames()[owner.ControllerNum] == "")
             {
                 return;
             }
