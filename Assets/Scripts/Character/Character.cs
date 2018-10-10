@@ -20,11 +20,11 @@ public class Character : MonoBehaviour
     // Unserialized fields don't appear in the inspector
     private Rigidbody2D rb;
 
-    [SerializeField]
     private bool grounded; // whether the character is on the ground
 
 
     // Movement value fields
+    [Header("Movement Attributes")]
     [SerializeField]
     private float walkSpeed = 1f; // walk speed in units/second
     [SerializeField]

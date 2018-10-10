@@ -4,12 +4,12 @@ using UnityEngine;
 
 public delegate void WinnerDeclaredEvent(int winnerIndex);
 
-public class GameMode {
+public abstract class GameMode {
 
     private Player[] players;
     private Player hasFocus; // which player has the spotlight
     protected bool inProgress;
-    protected event WinnerDeclaredEvent OnWin; // callback event for when the game is over
+    public event WinnerDeclaredEvent OnWin; // callback event for when the game is over
     protected SpotlightTracker light; // the spotlight
 
     // straightforward setup method for the gamemode, called when the mode is loaded up
@@ -18,9 +18,15 @@ public class GameMode {
         players = new Player[playerCount];
         for (int i = 0; i < playerCount; i++)
         {
-            players[i] = new Player(i);
+            players[i] = new Player(ConfigInfo.inputIndices[i]); // get the control index used by this player and feed it in
         }
         
+    }
+
+    // for setting up which spotlight to use
+    public void SetLight(SpotlightTracker lt)
+    {
+        light = lt;
     }
 
     // accessor for player list, should never be accessible
@@ -40,6 +46,7 @@ public class GameMode {
         {
             hasFocus = value;
             // set target of the spotlight
+            light.SetTarget(value.AttachedCharacter.transform);
         }
     }
 

@@ -17,9 +17,16 @@ public class PlayerController : MonoBehaviour
         pawn = GetComponent<Character>();
 
         // TODO: Replace this when we have a way to solidly join the game from like a menu
-        owner = new Player(debugPlayerIndex);
+        //owner = new Player(debugPlayerIndex);
 	}
 	
+    // gets a player passed in, and sets up references between the two
+    public void SetOwner(Player plyr)
+    {
+        owner = plyr;
+        owner.AttachedCharacter = gameObject;
+    }
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -35,6 +42,19 @@ public class PlayerController : MonoBehaviour
 
     void ReadInput()
     {
+        // if anything doesn't check out, return out now
+        if(owner == null)
+        {
+            return;
+        }
+
+        if (owner.ControllerNum != 0)
+        {
+            if (Input.GetJoystickNames().Length < owner.Index || Input.GetJoystickNames()[owner.Index] == "")
+            {
+                return;
+            }
+        }
         // grab horizontal input and plug it into the pawn
         pawn.Move(Input.GetAxis("Horizontal" + owner.GetJoystick()));
 
@@ -55,16 +75,23 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        // keyboard
-        else if (Input.GetAxis("Vertical" + owner.GetJoystick()) > 0)
+        // keyboard control
+        else
         {
-            pawn.Jump();
+            if (Input.GetAxis("Vertical" + owner.GetJoystick()) > 0)
+            {
+                pawn.Jump();
+            }
 
             if (Input.GetKey(KeyCode.RightShift))
             {
                 pawn.Attack();
             }
         }
-    }
+    }// end of ReadInput
 
+    public Player Owner
+    {
+        get { return owner; }
+    }
 }
