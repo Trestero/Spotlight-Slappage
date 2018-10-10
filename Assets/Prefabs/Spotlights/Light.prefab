@@ -119,5 +119,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingLocation: {fileID: 0}
-  lerpFactor: 0.1
-  safeDistance: 0.1
+  lerpFactor: 0.4
+  safeDistance: 0.05

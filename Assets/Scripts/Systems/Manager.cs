@@ -72,7 +72,6 @@ public class Manager : MonoBehaviour
             case Mode.Timed:
                 {
                     instance.Update(Time.deltaTime);
-                    Debug.Log(((TimedMode)instance).TimeRemaining);
                     break;
                 }
         }
@@ -81,5 +80,11 @@ public class Manager : MonoBehaviour
     void DisplayWinner(int winnerIndex)
     {
         Debug.Log("Winner: " + instance.GetPlayers()[winnerIndex].Name);
+    }
+    
+    // return whether the player in question has the light's focus
+    bool PlayerHasLight(Player plyr)
+    {
+        return (instance.PlayerWithFocus == plyr);
     }
 }
