@@ -41,21 +41,29 @@ public class PlayerController : MonoBehaviour
         // controller jump
         if (owner.GetJoystick() != 0)
         {
-            if (Input.GetButtonDown("Jump" + owner.GetJoystick()))
+            //if (Input.GetButtonDown("Jump" + owner.GetJoystick()))
+            if(Input.GetKeyDown("joystick " + owner.GetJoystick() + " button 1"))
             {
-                Debug.Log(Input.GetJoystickNames()[0]);
                 pawn.Jump();
             }
+
+            // Attack input for controller
+            if(Input.GetKeyDown("joystick " + owner.GetJoystick() + " button 0"))
+            {
+                pawn.Attack();
+            }
+
         }
 
         // keyboard
         else if (Input.GetAxis("Vertical" + owner.GetJoystick()) > 0)
         {
             pawn.Jump();
-        }
-        if(Input.GetKey(KeyCode.RightShift))
+
+            if (Input.GetKey(KeyCode.RightShift))
             {
-            pawn.Attack();
+                pawn.Attack();
+            }
         }
     }
 
