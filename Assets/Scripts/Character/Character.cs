@@ -68,7 +68,7 @@ public class Character : MonoBehaviour
         /// to make the jump height look natural, we can use this to solve for the necessary initial velocity
         /// This is computationally pretty inefficient, so once we have a solid jump height nailed down for characters we should do this in Start()
         /// For now this allows quick iteration and changing jumpHeight during editor playmode
-        jumpVelocity = Mathf.Sqrt(-Physics.gravity.y * jumpHeight * 2);
+        jumpVelocity = Mathf.Sqrt(-Physics2D.gravity.y * jumpHeight * 2);
 
 
         // jump to a given height in the direction opposite gravity

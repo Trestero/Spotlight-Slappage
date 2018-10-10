@@ -10,7 +10,7 @@ public class Slapper : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gameObject.SetActive(false);
-        rotTimer = 100;
+        rotTimer = 10;
 	}
 	
 	// Update is called once per frame

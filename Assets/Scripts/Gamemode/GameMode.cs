@@ -2,15 +2,79 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMode : MonoBehaviour {
+public delegate void WinnerDeclaredEvent(int winnerIndex);
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class GameMode {
+
+    private Player[] players;
+    private Player hasFocus; // which player has the spotlight
+    protected bool inProgress;
+    protected event WinnerDeclaredEvent OnWin; // callback event for when the game is over
+    protected SpotlightTracker light; // the spotlight
+
+    // straightforward setup method for the gamemode, called when the mode is loaded up
+    public virtual void Setup(int playerCount)
+    {
+        players = new Player[playerCount];
+        for (int i = 0; i < playerCount; i++)
+        {
+            players[i] = new Player(i);
+        }
+        
+    }
+
+    // accessor for player list, should never be accessible
+    public Player[] GetPlayers()
+    {
+        return players;
+    }
+
+    // which player has the spotlight
+    public Player PlayerWithFocus
+    {
+        get
+        {
+            return hasFocus;
+        }
+        set
+        {
+            hasFocus = value;
+            // set target of the spotlight
+        }
+    }
+
+    // Returns which player is in the lead
+    public virtual Player GetLeader()
+    {
+        Player max = players[0];
+        for (int i = 1; i < players.Length; i++)
+        {
+            if(players[i].Points > max.Points)
+            {
+                max = players[i];
+            }
+        }
+
+        return max;
+    }
+
+    // when some win condition is achieved, this method ends the game and does cleanup
+    protected virtual void EndGame(int winner)
+    {
+        inProgress = false;
+        OnWin(winner);
+    }
+
+    public virtual void Start()
+    {
+        inProgress = true;
+    }
+
+    public virtual void Update(float deltaTime)
+    {
+        if (!inProgress)
+        {
+            return;
+        }
+    }
 }
