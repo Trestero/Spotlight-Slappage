@@ -6,6 +6,7 @@ public class Slapper : MonoBehaviour {
 
     public float RotSpeed;
     public int rotTimer;
+    public GameObject gameManager;
 
 	// Use this for initialization
 	void Start () {
@@ -38,4 +39,20 @@ public class Slapper : MonoBehaviour {
             }
         }
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (rotTimer > 0 && collision.gameObject.CompareTag("Player") && gameManager.GetComponent<GameMode>().PlayerWithFocus == collision.gameObject.GetComponent<Player>() )
+        {
+            gameManager.GetComponent<GameMode>().PlayerWithFocus = transform.parent.gameObject.GetComponent<Player>();
+            if(RotSpeed > 0) //knockback
+            {
+                collision.gameObject.transform.position += new Vector3(0.0f, 5.0f);
+            }
+            else
+            {
+                collision.gameObject.transform.position += new Vector3(0.0f, -5.0f);
+            }
+        }
+    }
 }
