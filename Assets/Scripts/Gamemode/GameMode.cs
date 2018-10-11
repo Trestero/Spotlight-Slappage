@@ -19,6 +19,7 @@ public abstract class GameMode {
         for (int i = 0; i < playerCount; i++)
         {
             players[i] = new Player(ConfigInfo.inputIndices[i]); // get the control index used by this player and feed it in
+            players[i].Name = "P" + (i + 1);
         }
         
     }
@@ -62,6 +63,10 @@ public abstract class GameMode {
             }
         }
 
+        if(max.Points == 0)
+        {
+            return null;
+        }
         return max;
     }
 

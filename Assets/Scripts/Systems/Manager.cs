@@ -12,6 +12,8 @@ public class Manager : MonoBehaviour
     [SerializeField]
     private List<Transform> spawnLocations;
 
+    [SerializeField]
+    private GameObject scorePrefab;
 
     // information to use in setting up gamemodes
     [Header("Game Mode Configurations"), Space]
@@ -61,6 +63,9 @@ public class Manager : MonoBehaviour
     {
         GameObject obj = GameObject.Instantiate(playerPrefab, location, Quaternion.identity);
         obj.GetComponent<PlayerController>().SetOwner(playerToAssign);
+
+        GameObject ui = GameObject.Instantiate(scorePrefab, GameObject.Find("Canvas").transform);
+        ui.GetComponent<ScoreUI>().SetTarget(playerToAssign);
     }
 
 	// Update is called once per frame

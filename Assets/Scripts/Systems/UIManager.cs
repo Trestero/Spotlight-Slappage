@@ -22,11 +22,11 @@ public class UIManager : MonoBehaviour {
     public void Start() // sets up component references
     {
         manager = GetComponent<Manager>();
-        scoreText = new Text[playerPanels.Length];
-        for(int i = 0; i < playerPanels.Length; i++)
-        {
-            scoreText[i] = playerPanels[i].GetComponentInChildren<Text>();
-        }
+        //scoreText = new Text[playerPanels.Length];
+        //for(int i = 0; i < playerPanels.Length; i++)
+        //{
+        //    scoreText[i] = playerPanels[i].GetComponentInChildren<Text>();
+        //}
 
         timerText = timer.GetComponent<Text>();
 

@@ -70,6 +70,10 @@ public class Player
         {
             return name;
         }
+        set
+        {
+            name = value;
+        }
     }
 
     public int Points

@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         pawn.Move(Input.GetAxis("Horizontal" + owner.GetJoystick()));
 
         // controller jump
-        if (owner.GetJoystick() != 0)
+        if (owner.GetJoystick() > 0)
         {
             //if (Input.GetButtonDown("Jump" + owner.GetJoystick()))
             if(Input.GetKeyDown("joystick " + owner.GetJoystick() + " button 1"))
@@ -76,14 +76,15 @@ public class PlayerController : MonoBehaviour
         }
 
         // keyboard control
-        else
+        else /*if (owner.GetJoystick())*/
         {
             if (Input.GetAxis("Vertical" + owner.GetJoystick()) > 0)
             {
                 pawn.Jump();
             }
 
-            if (Input.GetKeyDown(KeyCode.RightShift))
+            
+            if (Input.GetButtonDown("Fire" + owner.GetJoystick()))
             {
                 pawn.Attack();
             }

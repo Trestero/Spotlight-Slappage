@@ -34,7 +34,10 @@ public class TimedMode : GameMode {
         if(pointTimer >= 1.0f)
         {
             pointTimer = 0f;
-            GetLeader().Points++;
+            if (PlayerWithFocus != null)
+            {
+                PlayerWithFocus.Points++;
+            }
         }
     }
 
