@@ -314,8 +314,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09a3503f8527e47a4ff08deee882db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 7
-  jumpHeight: 3.5
+  playerSprites:
+  - {fileID: 21300000, guid: 799170da0b411e4489163854f14c2ba7, type: 3}
+  - {fileID: 21300000, guid: 8266fbe2897d6064dae830854d0c90ee, type: 3}
+  walkSpeed: 10
+  jumpHeight: 4.5
   slapperLeft: {fileID: 1719138592192424}
   slapperRight: {fileID: 1068097794575752}
 --- !u!114 &114141434264613056

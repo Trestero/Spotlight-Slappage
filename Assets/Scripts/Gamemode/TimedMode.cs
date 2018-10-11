@@ -25,7 +25,7 @@ public class TimedMode : GameMode {
         if(roundTimer <= 0)
         {
             roundTimer = 0.0f; // for nice display purposes, stop at 0.0s
-            EndGame(GetLeader().Index);
+            EndGame();
         }
 
 

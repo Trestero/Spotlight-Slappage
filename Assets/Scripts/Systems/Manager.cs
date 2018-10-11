@@ -15,6 +15,9 @@ public class Manager : MonoBehaviour
     [SerializeField]
     private GameObject scorePrefab;
 
+    [SerializeField]
+    private GameObject winPrefab;
+
     // information to use in setting up gamemodes
     [Header("Game Mode Configurations"), Space]
     [Header("Timed Mode Settings")]
@@ -66,6 +69,8 @@ public class Manager : MonoBehaviour
 
         GameObject ui = GameObject.Instantiate(scorePrefab, GameObject.Find("Canvas").transform);
         ui.GetComponent<ScoreUI>().SetTarget(playerToAssign);
+
+
     }
 
 	// Update is called once per frame
@@ -82,9 +87,11 @@ public class Manager : MonoBehaviour
         }
 	}
 
-    void DisplayWinner(int winnerIndex)
+    void DisplayWinner()
     {
-        Debug.Log("Winner: " + instance.GetPlayers()[winnerIndex].Name);
+        GameObject go = GameObject.Instantiate(winPrefab, GameObject.Find("Canvas").transform);
+        if(instance.GetLeader() != null)
+        go.GetComponent<UnityEngine.UI.Text>().text = instance.GetLeader().Name + " Wins!";
     }
     
     // return whether the player in question has the light's focus

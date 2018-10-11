@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         // keyboard control
         else /*if (owner.GetJoystick())*/
         {
-            if (Input.GetAxis("Vertical" + owner.GetJoystick()) > 0)
+            if (Input.GetButtonDown("Vertical" + owner.GetJoystick()))
             {
                 pawn.Jump();
             }

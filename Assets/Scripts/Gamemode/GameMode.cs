@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void WinnerDeclaredEvent(int winnerIndex);
+public delegate void WinnerDeclaredEvent();
 
 public abstract class GameMode {
 
@@ -71,10 +71,10 @@ public abstract class GameMode {
     }
 
     // when some win condition is achieved, this method ends the game and does cleanup
-    protected virtual void EndGame(int winner)
+    protected virtual void EndGame()
     {
         inProgress = false;
-        OnWin(winner);
+        OnWin();
     }
 
     public virtual void Start()

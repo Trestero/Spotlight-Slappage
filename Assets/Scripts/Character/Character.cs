@@ -22,6 +22,9 @@ public class Character : MonoBehaviour
 
     private bool grounded; // whether the character is on the ground
 
+    [SerializeField]
+    private Sprite[] playerSprites;
+    private SpriteRenderer renderer;
 
     // Movement value fields
     [Header("Movement Attributes")]
@@ -41,12 +44,50 @@ public class Character : MonoBehaviour
     {
         // grab component references
         rb = GetComponent<Rigidbody2D>();
-	}
+        renderer = GetComponent<SpriteRenderer>();
+        Vector3 dir = Vector3.zero - transform.position;
+        if (dir.x > 0)
+        {
+            SetSprite(true);
+        }
+        else
+        {
+            SetSprite(false);
+        }
+    }
+
+    public void SetSprite(bool facingRight)
+    {
+        if(facingRight)
+        {
+            renderer.sprite = playerSprites[0];
+        }
+        else
+        {
+            renderer.sprite = playerSprites[1];
+        }
+    }
 
     public void Move(float dir) // takes in a float from -1 to 1 and applies walk speed, then turns that into horizontal velocity on the rigidbody
     {
         dir = Mathf.Clamp(dir, -1f, 1f); // clamp to ensure the input is treated as an input axis properly
+        if (grounded)
+        {
         rb.velocity = new Vector2(dir * walkSpeed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(rb.velocity.x + (dir * walkSpeed * (Time.deltaTime * 2f)), rb.velocity.y);
+        }
+
+        if(dir > 0)
+        {
+            SetSprite(true);
+        }
+        else if(dir < 0)
+        {
+            SetSprite(false);
+        }
     }
 
     public void Move(Vector2 dir) // on the off chance we want a flying character down the line, this overloaded version allows 2 dimensions of movement
@@ -75,6 +116,7 @@ public class Character : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         grounded = false;
     }
+
 
     // do attacky things
     public void Attack()

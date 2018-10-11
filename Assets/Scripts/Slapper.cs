@@ -12,6 +12,7 @@ public class Slapper : MonoBehaviour {
 	void Start () {
         gameObject.SetActive(false);
         rotTimer = 10;
+        gameManager = GameObject.FindGameObjectWithTag("Manager");
 	}
 	
 	// Update is called once per frame
@@ -42,16 +43,19 @@ public class Slapper : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (rotTimer > 0 && collision.gameObject.CompareTag("Player") && gameManager.GetComponent<GameMode>().PlayerWithFocus == collision.gameObject.GetComponent<Player>() )
+        if (rotTimer > 0 && collision.gameObject.CompareTag("Player"))
         {
-            gameManager.GetComponent<GameMode>().PlayerWithFocus = transform.parent.gameObject.GetComponent<Player>();
-            if(RotSpeed > 0) //knockback
+            if (gameManager.GetComponent<Manager>().instance.PlayerWithFocus == collision.gameObject.GetComponent<PlayerController>().Owner)
             {
-                collision.gameObject.transform.position += new Vector3(0.0f, 5.0f);
+                gameManager.GetComponent<Manager>().instance.PlayerWithFocus = transform.parent.gameObject.GetComponent<PlayerController>().Owner;
+            }
+            if (RotSpeed > 0) //knockback
+            {
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(-20.0f, 10.0f);
             }
             else
             {
-                collision.gameObject.transform.position += new Vector3(0.0f, -5.0f);
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(20.0f, 10.0f);
             }
         }
     }
