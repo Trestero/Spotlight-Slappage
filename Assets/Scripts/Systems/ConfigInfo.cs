@@ -9,7 +9,7 @@ public enum Mode { Timed };
 public static class ConfigInfo
 {
     // how many players to set up the game with
-    public static int playerCount = 2;
+    public static int playerCount = 3;
 
     // which mode to start gameplay in
     public static Mode currentGameMode = Mode.Timed;
