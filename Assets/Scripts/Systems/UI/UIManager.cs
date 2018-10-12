@@ -12,9 +12,17 @@ public class UIManager : MonoBehaviour {
     private GameObject timer;
     private Text timerText;
 
+    [SerializeField]
+    private GameObject tagPrefab;
+    [SerializeField]
+    private GameObject scorePanelPrefab;
+
+    public Color[] playerColors = new Color[4];
+
     // panels for player score tracking
     [SerializeField]
     private GameObject[] playerPanels;
+
     private Text[] scoreText;
 
     private Manager manager; // the game manager script attached to the same object
@@ -64,5 +72,14 @@ public class UIManager : MonoBehaviour {
         }
 
         return result;
+    }
+
+    public void AddPlayerUI(Player playerToAssign)
+    {
+        GameObject uiTag = GameObject.Instantiate(tagPrefab, GameObject.Find("Canvas").transform);
+        uiTag.GetComponent<PlayerTag>().SetTarget(playerToAssign);
+
+        GameObject scorePanel = GameObject.Instantiate(scorePanelPrefab, GameObject.Find("Canvas").transform);
+        scorePanel.GetComponent<ScoreUI>().SetTarget(playerToAssign);
     }
 }

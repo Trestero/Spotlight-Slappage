@@ -14,6 +14,12 @@ public static class ConfigInfo
     // which mode to start gameplay in
     public static Mode currentGameMode = Mode.Timed;
 
-    public static int[] inputIndices = { -2, -1, 0, 1 };
+    public static int[] inputIndices = { -1, 0, 1, 2 };
 
+
+    public static Color GetColor(int i)
+    {
+        UIManager uiManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<UIManager>();
+        return uiManager.playerColors[i];
+    }
 }

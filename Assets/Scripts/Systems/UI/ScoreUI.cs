@@ -9,11 +9,10 @@ public class ScoreUI : MonoBehaviour {
     private Transform trackTarget;
     private Player player;
 
-    [SerializeField]
-    private Vector3 offset = new Vector3(0, .8f, 0);
-
-
     private Camera cam;
+
+    private bool posSet = false;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -30,15 +29,16 @@ public class ScoreUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		if(player != null)
+        if (!posSet)
+        {
+            GetComponent<Image>().color = ConfigInfo.GetColor(player.Index - 1);
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(((player.Index - (ConfigInfo.playerCount / 2)) * 160) - 80, 20);
+            posSet = true;
+        }
+        if (player != null)
         {
             scoreText.text = player.Name + ": " + player.Points;
         }
-
-        // if there's a target to seek towards
-        if(trackTarget != null)
-        {
-            GetComponent<RectTransform>().anchoredPosition = cam.WorldToScreenPoint(trackTarget.position + offset);
-        }
 	}
+
 }

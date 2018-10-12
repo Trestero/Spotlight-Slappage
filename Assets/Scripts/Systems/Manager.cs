@@ -13,10 +13,10 @@ public class Manager : MonoBehaviour
     private List<Transform> spawnLocations;
 
     [SerializeField]
-    private GameObject scorePrefab;
-
-    [SerializeField]
     private GameObject winPrefab;
+
+    private UIManager uiManager;
+    
 
     // information to use in setting up gamemodes
     [Header("Game Mode Configurations"), Space]
@@ -30,6 +30,7 @@ public class Manager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        uiManager = GetComponent<UIManager>();
 		switch(ConfigInfo.currentGameMode)
         {
             // Timed mode
@@ -67,9 +68,8 @@ public class Manager : MonoBehaviour
         GameObject obj = GameObject.Instantiate(playerPrefab, location, Quaternion.identity);
         obj.GetComponent<PlayerController>().SetOwner(playerToAssign);
 
-        GameObject ui = GameObject.Instantiate(scorePrefab, GameObject.Find("Canvas").transform);
-        ui.GetComponent<ScoreUI>().SetTarget(playerToAssign);
 
+        uiManager.AddPlayerUI(playerToAssign);
 
     }
 

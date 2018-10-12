@@ -18,7 +18,7 @@ public abstract class GameMode {
         players = new Player[playerCount];
         for (int i = 0; i < playerCount; i++)
         {
-            players[i] = new Player(ConfigInfo.inputIndices[i]); // get the control index used by this player and feed it in
+            players[i] = new Player(i+1, ConfigInfo.inputIndices[i]); // get the control index used by this player and feed it in
             players[i].Name = "P" + (i + 1);
         }
         

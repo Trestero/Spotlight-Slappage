@@ -19,10 +19,10 @@ public class Player
         points = 0;
         name = "Chad";
     }
-    public Player(int index)
+    public Player(int index, int inputIndex)
     {
-        controllerIndex = index;
-        displayIndex = index + 1;
+        controllerIndex = inputIndex;
+        displayIndex = index;
         points = 0;
         name = "Player " + (displayIndex); 
     }
@@ -32,7 +32,7 @@ public class Player
     public int GetJoystick()
     {
 
-        return (displayIndex);
+        return (controllerIndex);
     }
 
     // properties

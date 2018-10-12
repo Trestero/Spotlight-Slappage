@@ -999,8 +999,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1159845695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.05, z: 0}
-  m_LocalScale: {x: 29.031425, y: 1, z: 8.3094}
+  m_LocalPosition: {x: 0, y: 7.62, z: 0}
+  m_LocalScale: {x: 29.031425, y: 1.55, z: 8.3094}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -1194,8 +1194,6 @@ MonoBehaviour:
   - {fileID: 1829719339}
   - {fileID: 904957895}
   - {fileID: 963787754}
-  scorePrefab: {fileID: 1518002888962028, guid: a8fa72d5f3d68f44d819dbafd7a4efee,
-    type: 2}
   winPrefab: {fileID: 1142431447307354, guid: fb938cb2223997147933084d036f6db2, type: 2}
   timedModeTimer: 120
 --- !u!114 &1441009497
@@ -1211,6 +1209,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCanvas: {fileID: 107703894}
   timer: {fileID: 648324673}
+  tagPrefab: {fileID: 1518002888962028, guid: a8fa72d5f3d68f44d819dbafd7a4efee, type: 2}
+  scorePanelPrefab: {fileID: 1857366562893550, guid: 947e2576a74953b4eabbe34e7787a0f7,
+    type: 2}
+  playerColors:
+  - {r: 1, g: 0, b: 0.07474327, a: 0.627451}
+  - {r: 0, g: 0.5137255, b: 1, a: 0.627451}
+  - {r: 1, g: 0.8836636, b: 0, a: 0.627451}
+  - {r: 0, g: 0.8301887, b: 0.0878812, a: 0.627451}
   playerPanels:
   - {fileID: 0}
 --- !u!1 &1577033095
