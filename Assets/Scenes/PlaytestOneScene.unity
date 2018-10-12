@@ -1195,7 +1195,7 @@ MonoBehaviour:
   - {fileID: 904957895}
   - {fileID: 963787754}
   winPrefab: {fileID: 1142431447307354, guid: fb938cb2223997147933084d036f6db2, type: 2}
-  timedModeTimer: 120
+  timedModeTimer: 60
 --- !u!114 &1441009497
 MonoBehaviour:
   m_ObjectHideFlags: 0

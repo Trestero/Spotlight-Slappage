@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
 
     [SerializeField]
     private Sprite[] playerSprites;
-    private SpriteRenderer renderer;
+    private SpriteRenderer displaySprite;
 
     // Movement value fields
     [Header("Movement Attributes")]
@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
     {
         // grab component references
         rb = GetComponent<Rigidbody2D>();
-        renderer = GetComponent<SpriteRenderer>();
+        displaySprite = GetComponent<SpriteRenderer>();
         Vector3 dir = Vector3.zero - transform.position;
         if (dir.x > 0)
         {
@@ -60,11 +60,11 @@ public class Character : MonoBehaviour
     {
         if(facingRight)
         {
-            renderer.sprite = playerSprites[0];
+            displaySprite.sprite = playerSprites[0];
         }
         else
         {
-            renderer.sprite = playerSprites[1];
+            displaySprite.sprite = playerSprites[1];
         }
     }
 

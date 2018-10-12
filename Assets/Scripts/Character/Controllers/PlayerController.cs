@@ -8,9 +8,6 @@ public class PlayerController : MonoBehaviour
     private Player owner; // Hook for player gameplay class
     private Character pawn; // The Character instance utilized by this controller
 
-    [SerializeField]
-    private int debugPlayerIndex = -1; // until we have a menu we'll set the player up this way, -1 is keyboard controls for now
-
 	// Use this for initialization
 	void Start ()
     {

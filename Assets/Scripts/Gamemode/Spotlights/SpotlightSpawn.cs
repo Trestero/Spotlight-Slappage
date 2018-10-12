@@ -7,12 +7,12 @@ public class SpotlightSpawn : MonoBehaviour
     [SerializeField]
     private GameObject lightPrefab;
 
-    private SpotlightTracker light;
+    private SpotlightTracker spotlight;
     private Manager manager;
 	// Use this for initialization
 	void Start ()
     {
-        light = GameObject.Instantiate(lightPrefab, transform.position, Quaternion.identity).GetComponent<SpotlightTracker>();
+        spotlight = GameObject.Instantiate(lightPrefab, transform.position, Quaternion.identity).GetComponent<SpotlightTracker>();
         manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<Manager>();
 	}
 
@@ -20,7 +20,7 @@ public class SpotlightSpawn : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            manager.instance.SetLight(light);
+            manager.instance.SetLight(spotlight);
             manager.instance.PlayerWithFocus = collision.GetComponent<PlayerController>().Owner;
             gameObject.SetActive(false);
         }
