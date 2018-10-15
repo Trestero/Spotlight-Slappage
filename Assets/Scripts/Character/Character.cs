@@ -39,6 +39,8 @@ public class Character : MonoBehaviour
     public GameObject slapperLeft;
     public GameObject slapperRight;
 
+    private bool facingR = true;
+
     // Use this for initialization
     void Start ()
     {
@@ -48,12 +50,14 @@ public class Character : MonoBehaviour
         Vector3 dir = Vector3.zero - transform.position;
         if (dir.x > 0)
         {
-            SetSprite(true);
+            facingR = true;
         }
         else
         {
-            SetSprite(false);
+            facingR = false;
         }
+
+        SetSprite(facingR);
     }
 
     public void SetSprite(bool facingRight)
@@ -71,23 +75,26 @@ public class Character : MonoBehaviour
     public void Move(float dir) // takes in a float from -1 to 1 and applies walk speed, then turns that into horizontal velocity on the rigidbody
     {
         dir = Mathf.Clamp(dir, -1f, 1f); // clamp to ensure the input is treated as an input axis properly
-        if (grounded)
+        if (grounded) // if on the ground, simply convert input to walk speed
         {
-        rb.velocity = new Vector2(dir * walkSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(dir * walkSpeed, rb.velocity.y);
+
         }
-        else
+        else // if airborne, allow some horizontal momentum to factor in
         {
-            rb.velocity = new Vector2(rb.velocity.x + (dir * walkSpeed * (Time.deltaTime * 2f)), rb.velocity.y);
+            rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x + (dir * walkSpeed * (Time.deltaTime * 2f)), -walkSpeed, walkSpeed), rb.velocity.y);
         }
 
         if(dir > 0)
         {
-            SetSprite(true);
+            facingR = true;
         }
         else if(dir < 0)
         {
-            SetSprite(false);
+            facingR = false;
         }
+
+        SetSprite(facingR);
     }
 
     public void Move(Vector2 dir) // on the off chance we want a flying character down the line, this overloaded version allows 2 dimensions of movement
@@ -121,19 +128,34 @@ public class Character : MonoBehaviour
     // do attacky things
     public void Attack()
     {
-        if(rb.velocity.x > 0 && slapperRight.activeSelf==false)
+        if(facingR && slapperRight.activeSelf==false)
         {
             slapperRight.SetActive(true);
         }
-        if (rb.velocity.x < 0 && slapperLeft.activeSelf == false)
+        if (!facingR && slapperLeft.activeSelf == false)
         {
             slapperLeft.SetActive(true);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (!grounded && (collision.gameObject.CompareTag("LevelBlock") || collision.gameObject.CompareTag("Player")))
+    //    {
+    //        grounded = true;
+    //    }
+    //}
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!grounded && collision.gameObject.CompareTag("LevelBlock"))
+        if(grounded && (collision.gameObject.CompareTag("LevelBlock") || collision.gameObject.CompareTag("Player")))
+        {
+            grounded = false;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!grounded && (collision.gameObject.CompareTag("LevelBlock") || collision.gameObject.CompareTag("Player")))
         {
             grounded = true;
         }

@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
         if (owner.ControllerNum > 0)
         {
-            if (Input.GetJoystickNames().Length < owner.Index || Input.GetJoystickNames()[owner.ControllerNum] == "")
+            if (Input.GetJoystickNames().Length < owner.ControllerNum || Input.GetJoystickNames()[owner.ControllerNum - 1] == "")
             {
                 return;
             }

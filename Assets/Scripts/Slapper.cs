@@ -45,18 +45,27 @@ public class Slapper : MonoBehaviour {
     {
         if (rotTimer > 0 && collision.gameObject.CompareTag("Player"))
         {
-            if (gameManager.GetComponent<Manager>().instance.PlayerWithFocus == collision.gameObject.GetComponent<PlayerController>().Owner)
+            Transform owner = transform.parent;
+            Vector2 slapDirection = (Vector2)(collision.transform.position - transform.position).normalized; // get the vector3 between the slapped player and the player slapping
+            collision.attachedRigidbody.velocity += new Vector2((50.0f * slapDirection.x), 7.0f);
+
+            if (gameManager.GetComponent<Manager>().instance.PlayerWithFocus == collision.gameObject.GetComponent<PlayerController>().Owner) // take the spotlight
             {
-                gameManager.GetComponent<Manager>().instance.PlayerWithFocus = transform.parent.gameObject.GetComponent<PlayerController>().Owner;
+                gameManager.GetComponent<Manager>().instance.PlayerWithFocus = owner.gameObject.GetComponent<PlayerController>().Owner;
+                // also apply force to the owner if stealing spotlight
+                owner.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2((100.0f * -slapDirection.x), 7.0f);
             }
-            if (RotSpeed > 0) //knockback
-            {
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(-20.0f, 10.0f);
-            }
-            else
-            {
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(20.0f, 10.0f);
-            }
+
+
+
+            //if (RotSpeed > 0) //knockback
+            //{
+            //    collision.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(-20.0f, 10.0f);
+            //}
+            //else
+            //{
+            //    collision.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(20.0f, 10.0f);
+            //}
         }
     }
 }

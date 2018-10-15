@@ -110,4 +110,9 @@ public class MenuManager : MonoBehaviour
         SetMenuVisibility(state, true);
         currentState = (MenuState)state;
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
