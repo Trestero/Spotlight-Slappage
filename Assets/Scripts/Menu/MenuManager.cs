@@ -68,7 +68,7 @@ public class MenuManager : MonoBehaviour
     // Checks if any input scheme has input, and tries to register a player if it's a new controller
     private void CheckforInput()
     {
-        for (int i = -1; i < 3; i++)
+        for (int i = -1; i <= Input.GetJoystickNames().Length; i++)
         {
             if ((i < 1 && Input.GetButtonDown("Vertical" + i)) || i > 0 && Input.GetKeyDown("joystick " + i + " button 1"))
             {
