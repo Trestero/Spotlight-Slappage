@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum MenuState
 {
@@ -15,6 +16,13 @@ public class MenuManager : MonoBehaviour
 
     private GameObject startButton;
     public GameObject[] menus;
+
+    [SerializeField]
+    private GameObject[] playerPanels;
+
+    [SerializeField]
+    private Color[] playerColors;
+
     HashSet<int> takenControllers; // used to keep track of which controllers have already been allocated to a player
     // Use this for initialization
     void Start()
@@ -85,10 +93,16 @@ public class MenuManager : MonoBehaviour
     {
         if(ConfigInfo.playerCount < 4) // don't go above maximum playerCount of 4
         {
-            // add the controller index to the input array and increment playerCount
+            // add the controller index to the input array
             ConfigInfo.inputIndices[ConfigInfo.playerCount] = controller;
+
+            // reflect player joined in the menu
+            GameObject go = playerPanels[ConfigInfo.playerCount];
+            go.GetComponent<Image>().color = playerColors[ConfigInfo.playerCount];
+            go.GetComponentInChildren<Text>().text = "P" + (ConfigInfo.playerCount + 1);
+
             Debug.Log(controller);
-            ConfigInfo.playerCount++;
+            ConfigInfo.playerCount++; // increment playerCount
 
         }
     }

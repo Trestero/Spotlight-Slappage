@@ -22,10 +22,11 @@ public class PlayerController : MonoBehaviour
     {
         owner = plyr;
         owner.AttachedCharacter = gameObject;
+        GetComponent<SpriteRenderer>().color = ConfigInfo.GetColor(plyr.Index - 1);
     }
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update ()
     {
         // check to make sure a player's been assigned to this character
 		if(owner == null)

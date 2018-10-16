@@ -54,8 +54,10 @@ public class Slapper : MonoBehaviour {
                 gameManager.GetComponent<Manager>().instance.PlayerWithFocus = owner.gameObject.GetComponent<PlayerController>().Owner;
                 // also apply force to the owner if stealing spotlight
                 owner.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2((100.0f * -slapDirection.x), 7.0f);
+                GameObject.Find("SlapFXPlayer").GetComponent<AudioSource>().Play();
             }
 
+            // play slap sound
 
 
             //if (RotSpeed > 0) //knockback
