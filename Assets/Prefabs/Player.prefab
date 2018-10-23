@@ -314,9 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09a3503f8527e47a4ff08deee882db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSprites:
-  - {fileID: 21300000, guid: 799170da0b411e4489163854f14c2ba7, type: 3}
-  - {fileID: 21300000, guid: 8266fbe2897d6064dae830854d0c90ee, type: 3}
+  playerSprites: []
   walkSpeed: 10
   jumpHeight: 4.5
   slapperLeft: {fileID: 1719138592192424}
@@ -395,7 +393,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 799170da0b411e4489163854f14c2ba7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8266fbe2897d6064dae830854d0c90ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

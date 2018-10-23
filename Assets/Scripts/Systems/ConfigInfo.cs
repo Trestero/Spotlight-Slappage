@@ -15,7 +15,7 @@ public static class ConfigInfo
     public static Mode currentGameMode = Mode.Timed;
 
     public static int[] inputIndices = { -1, 0, 1, 2 };
-    public static int[] characters = { 0, 0, 0, 0};
+    public static int[] characters = { 0, 1, 2, 1};
 
     public static Color GetColor(int i)
     {

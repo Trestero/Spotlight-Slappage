@@ -16,7 +16,9 @@ public class Manager : MonoBehaviour
     private GameObject winPrefab;
 
     private UIManager uiManager;
-    
+
+    [SerializeField]
+    private Sprite[] playerSprites = new Sprite[3];
 
     // information to use in setting up gamemodes
     [Header("Game Mode Configurations"), Space]
@@ -63,12 +65,16 @@ public class Manager : MonoBehaviour
 
     }
 
+    // given a player and spawnlocation, sets up a character controlled by the player
     private void SpawnPlayer(Player playerToAssign, Vector3 location)
     {
         GameObject obj = GameObject.Instantiate(playerPrefab, location, Quaternion.identity);
         obj.GetComponent<PlayerController>().SetOwner(playerToAssign);
+        // set sprite based on what the player chose
+        obj.GetComponent<SpriteRenderer>().sprite = playerSprites[ConfigInfo.characters[playerToAssign.Index - 1]];
 
 
+        // passes the player reference to the UI Manager to construct UI elements
         uiManager.AddPlayerUI(playerToAssign);
 
     }

@@ -23,7 +23,20 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private Color[] playerColors;
 
+    [Header("Costume Data")]
+    [SerializeField]
+    private Sprite[] costumeSprites;
+    [SerializeField]
+    private string[] costumeNames;
+
+    private Costume[] costumes;
+
+    [SerializeField]
+    private GameObject[] SpriteDisplays;
+
     HashSet<int> takenControllers; // used to keep track of which controllers have already been allocated to a player
+    bool[] readInput = { false, false, false, false }; // whether a given controller received input and should wait for a reset
+
     // Use this for initialization
     void Start()
     {
@@ -35,6 +48,12 @@ public class MenuManager : MonoBehaviour
             SetMenuVisibility(i, false);
         }
 
+        costumes = new Costume[costumeSprites.Length];
+        // initialize costume stuff
+        for(int i = 0; i< costumeSprites.Length; i++)
+        {
+            costumes[i] = new Costume(costumeNames[i], costumeSprites[i], i);
+        }
     }
 
     // Update is called once per frame
@@ -60,6 +79,10 @@ public class MenuManager : MonoBehaviour
                     }
                     break;
                 }
+            case (MenuState.Settings):
+                {
+                    break;
+                }
         }
         
     }
@@ -79,6 +102,43 @@ public class MenuManager : MonoBehaviour
                     takenControllers.Add(i);
                 }
             }
+        }
+
+
+        for(int x = 0; x < ConfigInfo.playerCount; x++)
+        {
+            int axisNum = ConfigInfo.inputIndices[x]; // get the input axis to check
+            float input = Input.GetAxis("Horizontal" + axisNum);
+            if(input == 0 ) // if no input, check the next joystick
+            {
+                readInput[x] = false;
+                continue;
+            }
+
+            if (!readInput[x]) // only execute this once per input set, require that the axis resets to 0 between changes
+            {
+                int currentChar = ConfigInfo.characters[x];
+                if (input > 0)
+                {
+                    // increment and wrap costume
+                    currentChar++;
+                    currentChar = currentChar % costumes.Length;
+                }
+                else if (input < 0)
+                {
+                    // decrement and wrap costume
+                    currentChar--;
+                    if (currentChar < 0)
+                    {
+                        currentChar = costumes.Length - 1;
+                    }
+                }
+                ConfigInfo.characters[x] = currentChar;
+                SpriteDisplays[x].GetComponent<Image>().sprite = costumes[currentChar].Outfit;
+                readInput[x] = true;
+            }
+
+
         }
     }
 
@@ -101,8 +161,14 @@ public class MenuManager : MonoBehaviour
             go.GetComponent<Image>().color = playerColors[ConfigInfo.playerCount];
             go.GetComponentInChildren<Text>().text = "P" + (ConfigInfo.playerCount + 1);
 
+
+            SpriteDisplays[ConfigInfo.playerCount].GetComponent<Image>().color = playerColors[ConfigInfo.playerCount];
+            SpriteDisplays[ConfigInfo.playerCount].GetComponent<Image>().sprite = costumes[0].Outfit;
+            ConfigInfo.characters[ConfigInfo.playerCount] = 0;
+
             Debug.Log(controller);
             ConfigInfo.playerCount++; // increment playerCount
+
 
         }
     }

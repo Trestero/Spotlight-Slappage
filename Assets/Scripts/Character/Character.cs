@@ -39,7 +39,7 @@ public class Character : MonoBehaviour
     public GameObject slapperLeft;
     public GameObject slapperRight;
 
-    private bool facingR = true;
+    private bool facingR = false;
 
     // stuff for invincibility and knockback
 
@@ -67,11 +67,13 @@ public class Character : MonoBehaviour
     {
         if(facingRight)
         {
-            displaySprite.sprite = playerSprites[0];
+            //displaySprite.sprite = playerSprites[0];
+            displaySprite.flipX = true;
         }
         else
         {
-            displaySprite.sprite = playerSprites[1];
+            //displaySprite.sprite = playerSprites[1];
+            displaySprite.flipX = false;
         }
     }
 
