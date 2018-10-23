@@ -41,6 +41,9 @@ public class Character : MonoBehaviour
 
     private bool facingR = true;
 
+    // stuff for invincibility and knockback
+
+
     // Use this for initialization
     void Start ()
     {
@@ -77,15 +80,17 @@ public class Character : MonoBehaviour
         dir = Mathf.Clamp(dir, -1f, 1f); // clamp to ensure the input is treated as an input axis properly
         if (grounded) // if on the ground, simply convert input to walk speed
         {
-            rb.velocity = new Vector2(dir * walkSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x + (dir * walkSpeed * (Time.deltaTime * 5f)), rb.velocity.y);
 
         }
         else // if airborne, allow some horizontal momentum to factor in
         {
-            rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x + (dir * walkSpeed * (Time.deltaTime * 2f)), -walkSpeed, walkSpeed), rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x + (dir * walkSpeed * (Time.deltaTime * 2f)), rb.velocity.y);
         }
 
-        if(dir > 0)
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -walkSpeed, walkSpeed), rb.velocity.y);
+
+        if (dir > 0)
         {
             facingR = true;
         }
@@ -130,21 +135,20 @@ public class Character : MonoBehaviour
     {
         if(facingR && slapperRight.activeSelf==false)
         {
-            slapperRight.SetActive(true);
+            slapperRight.SetActive(true); 
+            PlaySwingSound();
         }
         if (!facingR && slapperLeft.activeSelf == false)
         {
             slapperLeft.SetActive(true);
+            PlaySwingSound();
         }
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (!grounded && (collision.gameObject.CompareTag("LevelBlock") || collision.gameObject.CompareTag("Player")))
-    //    {
-    //        grounded = true;
-    //    }
-    //}
+    private void PlaySwingSound()
+    {
+        GameObject.Find("SwingFXPlayer" + Random.Range(1, 3)).GetComponent<AudioSource>().Play();
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {

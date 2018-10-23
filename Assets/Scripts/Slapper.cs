@@ -47,7 +47,7 @@ public class Slapper : MonoBehaviour {
         {
             Transform owner = transform.parent;
             Vector2 slapDirection = (Vector2)(collision.transform.position - transform.position).normalized; // get the vector3 between the slapped player and the player slapping
-            collision.attachedRigidbody.velocity += new Vector2((50.0f * slapDirection.x), 7.0f);
+            collision.attachedRigidbody.velocity += new Vector2((100.0f * slapDirection.x), 7.0f);
 
             if (gameManager.GetComponent<Manager>().instance.PlayerWithFocus == collision.gameObject.GetComponent<PlayerController>().Owner) // take the spotlight
             {

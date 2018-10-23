@@ -17,6 +17,14 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     private GameObject scorePanelPrefab;
 
+    [SerializeField]
+    private GameObject timerBar;
+
+    [SerializeField]
+    private GameObject scoreTrackerPrefab;
+
+    public GameObject[] playerTrackers = new GameObject[4];
+
     public Color[] playerColors = new Color[4];
 
     // panels for player score tracking
@@ -48,8 +56,19 @@ public class UIManager : MonoBehaviour {
         {
             case (Mode.Timed):
                 {
-                    timerText.text = FormatTime(((TimedMode)manager.instance).TimeRemaining);
+                    float timeLeft = ((TimedMode)manager.instance).TimeRemaining;
+                    float timeTotal = GetComponent<Manager>().timedModeTimer;
+                    timerText.text = FormatTime(timeLeft);
+                    timerBar.GetComponent<Image>().fillAmount = 1 - (timeLeft / timeTotal);
+
+                    // update player tracking positions
+                    for(int i = 0; i < playerTrackers.Length; i++)
+                    {
+                        int score = ((TimedMode)manager.instance).GetPlayers()[i].Points;
+                        playerTrackers[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(515f * (score / timeTotal), -40 - (5 * i), -(score / timeTotal));
+                    }
                     break;
+
                 }
         }
     }
@@ -81,5 +100,9 @@ public class UIManager : MonoBehaviour {
 
         GameObject scorePanel = GameObject.Instantiate(scorePanelPrefab, GameObject.Find("Canvas").transform);
         scorePanel.GetComponent<ScoreUI>().SetTarget(playerToAssign);
+
+        GameObject tracker = GameObject.Instantiate(scoreTrackerPrefab, GameObject.Find("TimerBar").transform);
+        playerTrackers[playerToAssign.Index - 1] = tracker;
+        tracker.GetComponent<Image>().color = playerColors[playerToAssign.Index - 1];
     }
 }

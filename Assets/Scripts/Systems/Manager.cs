@@ -21,8 +21,8 @@ public class Manager : MonoBehaviour
     // information to use in setting up gamemodes
     [Header("Game Mode Configurations"), Space]
     [Header("Timed Mode Settings")]
-    [SerializeField, Tooltip("Length of the round timer in seconds.")]
-    private float timedModeTimer = 180;
+    [Tooltip("Length of the round timer in seconds.")]
+    public float timedModeTimer = 180;
 
     public GameMode instance; // the instance of the game to be initialized
 

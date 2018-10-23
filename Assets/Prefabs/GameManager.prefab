@@ -193,6 +193,14 @@ MonoBehaviour:
   tagPrefab: {fileID: 1518002888962028, guid: a8fa72d5f3d68f44d819dbafd7a4efee, type: 2}
   scorePanelPrefab: {fileID: 1857366562893550, guid: 947e2576a74953b4eabbe34e7787a0f7,
     type: 2}
+  timerBar: {fileID: 0}
+  scoreTrackerPrefab: {fileID: 1529256870010678, guid: ec6de24b86ae9a6478fb2f163adff7c6,
+    type: 2}
+  playerTrackers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   playerColors:
   - {r: 1, g: 0, b: 0.07474327, a: 0.627451}
   - {r: 0, g: 0.5137255, b: 1, a: 0.627451}
