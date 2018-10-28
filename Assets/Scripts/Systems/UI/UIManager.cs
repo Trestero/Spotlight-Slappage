@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour {
                     timerBar.GetComponent<Image>().fillAmount = 1 - (timeLeft / timeTotal);
 
                     // update player tracking positions
-                    for(int i = 0; i < playerTrackers.Length; i++)
+                    for(int i = 0; i < ConfigInfo.playerCount; i++)
                     {
                         int score = ((TimedMode)manager.instance).GetPlayers()[i].Points;
                         playerTrackers[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(515f * (score / timeTotal), -40 - (5 * i), -(score / timeTotal));
